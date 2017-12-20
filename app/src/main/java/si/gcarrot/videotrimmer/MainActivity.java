@@ -134,6 +134,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        if(getIntent().getStringExtra("filepath") != null){
+            String filepath = getIntent().getStringExtra("filepath");
+            videoView.setVideoURI(Uri.parse(filepath));
+            videoView.start();
+
+            retriever.setDataSource(this, Uri.parse(filepath));
+            String time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+
+            seekBar.setMax(Integer.parseInt(time));
+
+            seekBar.postDelayed(onEverySecond, 1000);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

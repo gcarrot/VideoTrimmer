@@ -253,7 +253,10 @@ public class Trimmer extends AppCompatActivity {
                 @Override
                 public void onSuccess(String message) {
                     Log.d(TAG, "SUCCESS: " + message);
+
+                    // Send file path to preview finish product
                     Intent intent = new Intent(Trimmer.this, MainActivity.class);
+                    intent.putExtra("filepath", filePath);
                     startActivity(intent);
                 }
 
@@ -270,6 +273,8 @@ public class Trimmer extends AppCompatActivity {
                     Log.d(TAG, "Started command : ffmpeg " + command);
                     progressDialog.setMessage("Processing...");
                     progressDialog.show();
+
+                    videoView.pause();
                 }
 
                 @Override
